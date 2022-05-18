@@ -42,7 +42,12 @@ CREATE TABLE recipes (
 -- | recipe_id     | INTEGER     | FK, NOT NULL |
 
 -- YOUR CODE HERE
-
+CREATE TABLE instructions (
+  id SERIAL PRIMARY KEY,
+  specification TEXT NOT NULL,
+  list_order INTEGER NOT NULL,
+  recipe_id INTEGER NOT NULL REFERENCES recipes(id)
+);
 
 
 
@@ -58,7 +63,10 @@ CREATE TABLE recipes (
 -- | name        | VARCHAR(20) | NOT NULL    |
 
 -- YOUR CODE HERE
-
+CREATE TABLE units_of_measure (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(20) NOT NULL
+);
 
 
 
@@ -81,7 +89,13 @@ CREATE TABLE recipes (
 -- | recipe_id          | INTEGER       | FK, NOT NULL |
 
 -- YOUR CODE HERE
-
+CREATE TABLE ingredients (
+  id SERIAL PRIMARY KEY,
+  amount NUMERIC(5,2) NOT NULL,
+  unit_of_measure_id INTEGER NOT NULL REFERENCES units_of_measure(id),
+  food_stuff VARCHAR(500) NOT NULL,
+  recipe_id INTEGER NOT NULL REFERENCES recipes(id)
+);
 
 
 
